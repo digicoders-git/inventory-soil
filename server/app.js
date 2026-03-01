@@ -7,7 +7,24 @@ import cookieParser from 'cookie-parser';
 
 import dotenv from "dotenv"
 dotenv.config();
+import connectDB from './config/db.js';
+
 const app = express();
+
+// Ensure DB connection for all API requests (helpful for serverless)
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    try {
+      await connectDB();
+      next();
+    } catch (err) {
+      res.status(500).json({ success: false, message: 'Database Connection Error' });
+    }
+  } else {
+    next();
+  }
+});
+
 
 // CORS configuration
 app.use(cors({
