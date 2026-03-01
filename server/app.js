@@ -57,6 +57,9 @@ import siteSettlementRoutes from './routes/siteSettlementRoutes.js';
 import machineMovementRoutes from './routes/machineMovementRoutes.js';
 import repairRoutes from './routes/repairRoutes.js';
 import fundRoutes from './routes/fundRoutes.js';
+import machineRoutes from './routes/machineRoutes.js';
+import siteMachineRoutes from './routes/siteMachineRoutes.js';
+
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 // Routes
@@ -73,6 +76,9 @@ app.use('/api/site-settlements', siteSettlementRoutes);
 app.use('/api/movements', machineMovementRoutes);
 app.use('/api/repairs', repairRoutes);
 app.use('/api/admin-funds', fundRoutes);
+app.use('/api/machines', machineRoutes);
+app.use('/api/site-machines', siteMachineRoutes);
+
 
 
 // Health check
