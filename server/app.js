@@ -11,8 +11,8 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-  // origin: process.env.CLIENT_URL,
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: process.env.CLIENT_URL,
+  // origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -26,9 +26,10 @@ app.use(helmet({
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 500
 });
-// app.use('/api', limiter);
+
+app.use('/api', limiter);
 
 // Body parser
 app.use(express.json());
